@@ -25,14 +25,14 @@ class Our_dictionary:
         else:
             return self.go_out()
 
-
-
-
-
-
     def add_new_word(self):
-        pass
+        self.cls()
+        input_eng_word = input("English: ").strip()
+        while self.is_string_empty(input_eng_word) or not input_eng_word.isalpha():
+            self.cls()
+            input_eng_word = input("English: ").strip()
 
+        input_uz_word = input("Uzbek: ")
     def show_words(self):
         pass
 
