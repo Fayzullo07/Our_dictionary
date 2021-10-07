@@ -48,7 +48,11 @@ class Our_dictionary:
         self.system_entrance()
 
     def show_words(self):
-        pass
+        my_db = self.entrance_database()
+        mycursor = my_db.cursor()
+        mycursor.execute("select * from words")
+        for soz in mycursor:
+            print(soz[0] ,"|",soz[1])
 
     def search_word(self):
         pass
@@ -73,23 +77,23 @@ class Our_dictionary:
     def is_string_empty(str_):
         return not bool(str_)
 
-    # @staticmethod
-    # def entrance_database():
-    #     return mysql.connector.connect(
-    #         host="localhost",
-    #         user="Avazbek",
-    #         password="12345678",
-    #         database="lugat"
-    #     )
-
     @staticmethod
     def entrance_database():
         return mysql.connector.connect(
             host="localhost",
-            user="Fayzullo",
-            password="77777777",
-            database="Register"
+            user="Avazbek",
+            password="12345678",
+            database="lugat"
         )
+
+    # @staticmethod
+    # def entrance_database():
+    #     return mysql.connector.connect(
+    #         host="localhost",
+    #         user="Fayzullo",
+    #         password="77777777",
+    #         database="Register"
+    #     )
 
 
 dict1 = Our_dictionary()
