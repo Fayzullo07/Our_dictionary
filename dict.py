@@ -17,7 +17,17 @@ class Our_dictionary:
             input_choice = input(">>>: ").strip()
 
         if input_choice == options[0]:
-            return
+            return self.add_new_word()
+        elif input_choice == options[1]:
+            return self.search_word()
+        elif input_choice == options[2]:
+            return self.show_words()
+        else:
+            return self.go_out()
+
+
+
+
 
 
     def add_new_word(self):
