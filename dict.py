@@ -1,4 +1,6 @@
 import os
+import sys
+
 import mysql.connector
 
 
@@ -48,17 +50,34 @@ class Our_dictionary:
         self.system_entrance()
 
     def show_words(self):
+        self.cls()
         my_db = self.entrance_database()
         mycursor = my_db.cursor()
         mycursor.execute("select * from words")
+        print("\n")
         for soz in mycursor:
-            print(soz[0] ,"|",soz[1])
+            print("\t", soz[0], "\t|", soz[1])
+
+        space = input("\nEnter")
+        self.system_entrance()
 
     def search_word(self):
-        pass
+        self.cls()
+        input_eng = input("English: ").strip().lower()
+        while self.is_string_empty(input_eng) or not input_eng.isalpha():
+            self.cls()
+            input_eng = input("English: ").strip().lower()
+
+        my_db = self.entrance_database()
+        mycursor = my_db.cursor()
+        mycursor.execute(f"select * from words where English='{input_eng}'")
+        for soz in mycursor:
+            print("\t", soz[0].capitalize(), "\t|", soz[1].capitalize())
 
     def go_out(self):
-        pass
+        self.cls()
+        print("\n\n\t\tHave a good day!")
+        sys.exit()
 
     @staticmethod
     def print_messege():
@@ -77,23 +96,23 @@ class Our_dictionary:
     def is_string_empty(str_):
         return not bool(str_)
 
-    @staticmethod
-    def entrance_database():
-        return mysql.connector.connect(
-            host="localhost",
-            user="Avazbek",
-            password="12345678",
-            database="lugat"
-        )
-
     # @staticmethod
     # def entrance_database():
     #     return mysql.connector.connect(
     #         host="localhost",
-    #         user="Fayzullo",
-    #         password="77777777",
-    #         database="Register"
+    #         user="Avazbek",
+    #         password="12345678",
+    #         database="lugat"
     #     )
+
+    @staticmethod
+    def entrance_database():
+        return mysql.connector.connect(
+            host="localhost",
+            user="Fayzullo",
+            password="77777777",
+            database="Register"
+        )
 
 
 dict1 = Our_dictionary()
