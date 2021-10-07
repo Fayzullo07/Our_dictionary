@@ -2,14 +2,6 @@ import os
 import mysql.connector
 
 
-
-
-
-
-
-
-
-
 class Our_dictionary:
     def __init__(self):
         self.eng_word = None
@@ -36,23 +28,24 @@ class Our_dictionary:
 
     def add_new_word(self):
         self.cls()
-        input_eng_word = input("English: ").strip()
+        input_eng_word = input("English: ").strip().lower()
         while self.is_string_empty(input_eng_word) or not input_eng_word.isalpha():
             self.cls()
-            input_eng_word = input("English: ").strip()
+            input_eng_word = input("English: ").strip().lower()
 
-        input_uz_word = input("Uzbek: ").strip()
+        input_uz_word = input("Uzbek: ").strip().lower()
         while self.is_string_empty(input_uz_word) or not input_uz_word.isalpha():
             self.cls()
-            input_uz_word = input("Uzbek: ").strip()
+            input_uz_word = input("Uzbek: ").strip().lower()
 
         self.eng_word = input_eng_word
         self.uz_word = input_uz_word
 
-        mydb = self.entrance_database()
-        mycursor = mydb.cursor()
-        mycursor.execute(f"insert into words(English, Uzbek)values('{self.eng_word}', '{self.uz_word}')")
-        mydb.commit()
+        my_db = self.entrance_database()
+        mycursor = my_db.cursor()
+        mycursor.execute(f"INSERT INTO words(English, Uzbek) VALUES ('{self.eng_word}', '{self.uz_word}')")
+        my_db.commit()
+        self.system_entrance()
 
     def show_words(self):
         pass
@@ -80,13 +73,24 @@ class Our_dictionary:
     def is_string_empty(str_):
         return not bool(str_)
 
-    def entrance_database(self):
+    # @staticmethod
+    # def entrance_database():
+    #     return mysql.connector.connect(
+    #         host="localhost",
+    #         user="Avazbek",
+    #         password="12345678",
+    #         database="lugat"
+    #     )
+
+    @staticmethod
+    def entrance_database():
         return mysql.connector.connect(
             host="localhost",
-            user="Avazbek",
-            password="12345678",
-            database="lugat"
+            user="Fayzullo",
+            password="77777777",
+            database="Register"
         )
+
 
 dict1 = Our_dictionary()
 dict1.system_entrance()
